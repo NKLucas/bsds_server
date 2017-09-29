@@ -35,7 +35,7 @@ public class WSClientMain {
         System.out.println("Max Threads: " + MAX_THREAD);
         System.out.println("Iterations: " + ITERATIONS + "\n");
 
-        System.out.println("Client stating...");
+        System.out.println("Client starting...");
         System.out.println("Current time: " + new Date().toString() + "\n");
 
         String url = base + ":" + port + "/" + serviceName + apiPath;
@@ -55,7 +55,7 @@ public class WSClientMain {
         long end = System.currentTimeMillis();
 
         System.out.println("All threads are now completed.");
-        System.out.println("Total request send: " + totalRequest);
+        System.out.println("Total requests send: " + totalRequest);
         System.out.println("Total successful responses: " + successRequest);
         System.out.println();
         System.out.println("Current time: " + new Date().toString());
