@@ -1,11 +1,11 @@
-package edu.neu.zhiyu;
+package edu.neu.zhiyu.api;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 
 @Path("/status")
-public class SimpleCall {
+public class HealthCheck {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getStatus() {

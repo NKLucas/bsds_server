@@ -1,4 +1,4 @@
-package edu.neu.zhiyu;
+package edu.neu.zhiyu.api;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
