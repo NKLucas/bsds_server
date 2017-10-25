@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class WSClientMain {
+public class A1ClientMain {
 
     private static String baseUrl = "http://ec2-34-209-86-171.us-west-2.compute.amazonaws.com";
     private static String defaultPort = "8080";
@@ -25,7 +25,7 @@ public class WSClientMain {
         AtomicInteger totalRequest = new AtomicInteger(0);
         AtomicInteger successRequest = new AtomicInteger(0);
 
-        List<WSClient> clients = new ArrayList<>();
+        List<A1Client> clients = new ArrayList<>();
         List<Long> latencies = new ArrayList<>();
 
         if (argv.length == 4) {
@@ -50,7 +50,7 @@ public class WSClientMain {
         long start = System.currentTimeMillis();
 
         for (int id = 0; id < MAX_THREAD; id++) {
-            WSClient client = new WSClient(url, ITERATIONS, totalRequest, successRequest);
+            A1Client client = new A1Client(url, ITERATIONS, totalRequest, successRequest);
             clients.add(client);
             ex.submit(client);
         }
@@ -70,7 +70,7 @@ public class WSClientMain {
 
         System.out.println("Some stats: \n");
 
-        for (WSClient client : clients) {
+        for (A1Client client : clients) {
             for (Long lat : client.getLatencies()) {
                 latencies.add(lat);
             }

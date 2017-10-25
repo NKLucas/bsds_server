@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class WSClient extends Thread {
+public class A1Client extends Thread {
 
     private WebTarget webTarget;
     private int iterations;
@@ -18,7 +18,7 @@ public class WSClient extends Thread {
     private List<Long> latencies = new ArrayList<>();
 
 
-    public WSClient(String url, int iterations, AtomicInteger totalRequest, AtomicInteger successRequest) {
+    public A1Client(String url, int iterations, AtomicInteger totalRequest, AtomicInteger successRequest) {
         Client client = ClientBuilder.newClient();
         this.webTarget = client.target(url);
         this.iterations = iterations;
