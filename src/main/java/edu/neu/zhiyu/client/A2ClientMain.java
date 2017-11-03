@@ -37,11 +37,11 @@ public class A2ClientMain {
                 System.out.println("Invalid Record Found!");
                 continue;
             }
-            int restoreID = Integer.parseInt(details[0]);
+            String restoreID = details[0];
             int day = Integer.parseInt(details[1]);
-            int skierID = Integer.parseInt(details[2]);
-            int liftID = Integer.parseInt(details[3]);
-            int time = Integer.parseInt(details[4]);
+            String skierID = details[2];
+            String liftID = details[3];
+            String time = details[4];
             RFIDLiftData liftData = new RFIDLiftData(restoreID, day, skierID, liftID, time);
             lifts.add(gson.toJson(liftData));
 //            if (lifts.size() >= 100000) {
@@ -82,7 +82,5 @@ public class A2ClientMain {
         }
         return sum;
     }
-
-
 
 }

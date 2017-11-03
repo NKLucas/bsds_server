@@ -7,8 +7,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DBConnection {
-    private static final String DBURL = "jdbc:postgresql://"
-            + "bsds-postgresql-db.cdz7axjtmano.us-west-2.rds.amazonaws.com:5432/bsds-postgresql-db";
+    private static final String DBURL = "jdbc:postgresql://" +
+            "bsds-postgresql-db.cdz7axjtmano.us-west-2.rds.amazonaws.com:5432/" +
+            "SkiDB";
     private static final String USER = "zhiyu";
     private static final String PASSWORD = "nklucas1991";
 

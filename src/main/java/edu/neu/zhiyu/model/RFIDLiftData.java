@@ -5,21 +5,19 @@
  */
 package edu.neu.zhiyu.model;
 
-import java.io.Serializable;
-
 /**
  *
  * Simple class to wrap the data in a RFID lift pass reader record
  */
 public class RFIDLiftData {
     
-    private int resortID;
+    private String resortID;
     private int dayNum;
-    private int skierID;
-    private int liftID;
-    private int time;
+    private String skierID;
+    private String liftID;
+    private String time;
 
-    public RFIDLiftData(int resortID, int dayNum, int skierID, int liftID, int time) {
+    public RFIDLiftData(String resortID, int dayNum, String skierID, String liftID, String time) {
         this.resortID = resortID;
         this.dayNum = dayNum;
         this.skierID = skierID;
@@ -27,11 +25,11 @@ public class RFIDLiftData {
         this.time = time;
     }
 
-    public int getResortID() {
+    public String getResortID() {
         return resortID;
     }
 
-    public void setResortID(int resortID) {
+    public void setResortID(String resortID) {
         this.resortID = resortID;
     }
 
@@ -43,27 +41,27 @@ public class RFIDLiftData {
         this.dayNum = dayNum;
     }
 
-    public int getSkierID() {
+    public String getSkierID() {
         return skierID;
     }
 
-    public void setSkierID(int skierID) {
+    public void setSkierID(String skierID) {
         this.skierID = skierID;
     }
 
-    public int getLiftID() {
+    public String getLiftID() {
         return liftID;
     }
 
-    public void setLiftID(int liftID) {
+    public void setLiftID(String liftID) {
         this.liftID = liftID;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
     
