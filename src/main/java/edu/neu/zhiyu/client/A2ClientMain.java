@@ -12,7 +12,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class A2ClientMain {
-    private static String baseUrl = "http://ec2-34-209-86-171.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
+
+    // small
+//    private static String baseUrl = "http://ec2-34-209-86-171.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
+    // large
+    private static String baseUrl = "http://ec2-34-209-12-29.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
     private static String defaultPort = "8080";
     private static String serviceName = "bsds-server";
     private static String apiPath = "/api/ski/status";
@@ -58,7 +62,7 @@ public class A2ClientMain {
             int startIndex = i * countForEachThreads;
             int endIndex = i == THREADS - 1 ? lifts.size() : (i + 1) * countForEachThreads;
             List<String> data = lifts.subList(startIndex, endIndex);
-            System.out.println("Data size for thread i: " + i + " is: " + data.size());
+//            System.out.println("Data size for thread i: " + i + " is: " + data.size());
             A2Client client = new A2Client(baseUrl, data);
             clients.add(client);
             ex.submit(client);

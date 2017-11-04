@@ -43,7 +43,7 @@ public class A2Client extends Thread {
             Response response = this.postData(d);
             response.close();
             requestSent += 1;
-            if (requestSent % 1000 == 0) {
+            if (requestSent % 4000 == 0) {
                 System.out.println(requestSent + " reqeusts been sent!");
             }
             if (response.getStatus() == 200) {

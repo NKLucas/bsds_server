@@ -24,7 +24,8 @@ public class DBConnection {
         Connection connection = null;
 
         try {
-            DriverManager.getConnection(DBURL, USER, PASSWORD);
+            System.out.println("DBURL: " + DBURL);
+            connection = DriverManager.getConnection(DBURL, USER, PASSWORD);
         } catch (SQLException e) {
             Logger.getLogger(DBConnection.class.getName())
                     .log(Level.SEVERE, "Failed to connect to db.", e);

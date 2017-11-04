@@ -26,7 +26,7 @@ public class LiftDataDAO {
         return instance;
     }
 
-    public void batchInsert(List<RFIDLiftData> data) throws SQLException {
+    public static void batchInsert(List<RFIDLiftData> data) throws SQLException {
         PreparedStatement statement = null;
         Connection connection = null;
         try{
@@ -49,7 +49,7 @@ public class LiftDataDAO {
         }
     }
 
-    private void prepareStatement(PreparedStatement statement, RFIDLiftData record) throws SQLException {
+    private static void prepareStatement(PreparedStatement statement, RFIDLiftData record) throws SQLException {
         statement.setString(1, record.getResortID());
         statement.setInt(2, record.getDayNum());
         statement.setString(3, record.getSkierID());
