@@ -1,13 +1,13 @@
 package edu.neu.zhiyu.model;
 
-public class LiftDataStat {
+public class LiftStat {
     private String id;
     private String skierID;
     private int dayNum;
     private int liftCount;
     private int totalVertical;
 
-    public LiftDataStat(String id, String skierID, int dayNum, int liftCount, int totalVertical) {
+    public LiftStat(String id, String skierID, int dayNum, int liftCount, int totalVertical) {
         this.id = id;
         this.skierID = skierID;
         this.dayNum = dayNum;
