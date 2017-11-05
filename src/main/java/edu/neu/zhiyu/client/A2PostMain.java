@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class A2ClientMain {
+public class A2PostMain {
 
     // small
 //    private static String REMOTE_URL = "http://ec2-34-209-86-171.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
@@ -25,7 +25,7 @@ public class A2ClientMain {
         loadDataFromFile(lifts, filePath);
         System.out.println("Total Record Read: " + lifts.size());
 
-        List<A2Client> clients = new ArrayList<>();
+        List<A2PostClient> clients = new ArrayList<>();
         ExecutorService ex = Executors.newFixedThreadPool(THREADS);
         int countForEachThreads = lifts.size() / THREADS;
 
@@ -33,7 +33,7 @@ public class A2ClientMain {
             int startIndex = i * countForEachThreads;
             int endIndex = i == THREADS - 1 ? lifts.size() : (i + 1) * countForEachThreads;
             List<String> data = lifts.subList(startIndex, endIndex);
-            A2Client client = new A2Client(REMOTE_URL, data);
+            A2PostClient client = new A2PostClient(REMOTE_URL, data);
             clients.add(client);
             ex.submit(client);
         }
@@ -70,19 +70,19 @@ public class A2ClientMain {
             String time = details[4];
             RFIDLiftData liftData = new RFIDLiftData(restoreID, day, skierID, liftID, time);
             lifts.add(gson.toJson(liftData));
-            if (lifts.size() >= 1000000) {
+            if (lifts.size() >= 1000) {
                 break;
             }
         }
     }
 
-    private static void calculateAndPrintStats(List<A2Client> clients) {
+    private static void calculateAndPrintStats(List<A2PostClient> clients) {
         System.out.println("Some stats: \n");
         List<Long> latencies = new ArrayList<>();
         int totalRequest = 0;
         int successRequest = 0;
 
-        for (A2Client client : clients) {
+        for (A2PostClient client : clients) {
             totalRequest += client.getRequestSent();
             successRequest += client.getSuccessReq();
             latencies.addAll(client.getLatencies());

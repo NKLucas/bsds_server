@@ -11,7 +11,7 @@ import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-public class A2Client extends Thread {
+public class A2PostClient extends Thread {
 
     private WebTarget webTarget;
     private List<Long> latencies = new ArrayList<>();
@@ -20,7 +20,7 @@ public class A2Client extends Thread {
     private int successReq = 0;
 
 
-    public A2Client(String url, List<String> data) {
+    public A2PostClient(String url, List<String> data) {
         Client client = ClientBuilder.newClient();
         this.webTarget = client.target(url);
         this.data = data;
@@ -31,11 +31,6 @@ public class A2Client extends Thread {
         return web.request(APPLICATION_JSON).post(Entity.entity(record, APPLICATION_JSON));
     }
 
-    public Response getStatus() throws ClientErrorException {
-        WebTarget web = webTarget.path("/myvert/1/100");
-        return web.request().get();
-    }
-
     @Override
     public void run() {
         for (String d : data) {
@@ -43,9 +38,6 @@ public class A2Client extends Thread {
             Response response = this.postData(d);
             response.close();
             requestSent += 1;
-//            if (requestSent % 4000 == 0) {
-//                System.out.println(requestSent + " reqeusts been sent!");
-//            }
             if (response.getStatus() == 200) {
                 successReq += 1;
             }
