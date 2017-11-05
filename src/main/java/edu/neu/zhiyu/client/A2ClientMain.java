@@ -70,7 +70,7 @@ public class A2ClientMain {
             String time = details[4];
             RFIDLiftData liftData = new RFIDLiftData(restoreID, day, skierID, liftID, time);
             lifts.add(gson.toJson(liftData));
-            if (lifts.size() >= 1000) {
+            if (lifts.size() >= 1000000) {
                 break;
             }
         }

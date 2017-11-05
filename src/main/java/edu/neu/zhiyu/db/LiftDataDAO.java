@@ -5,6 +5,7 @@ import edu.neu.zhiyu.model.RFIDLiftData;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,4 +57,12 @@ public class LiftDataDAO {
         statement.setString(4, record.getLiftID());
         statement.setString(5, record.getTime());
     }
+
+//    public static void main(String[] args) throws SQLException {
+//        List<RFIDLiftData> data = new ArrayList<>();
+//        data.add(new RFIDLiftData("1", 2, "3", "4", "5"));
+//        batchInsert(data);
+//    }
+
+
 }

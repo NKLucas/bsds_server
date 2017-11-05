@@ -30,12 +30,9 @@ public class DataCacher {
     }
 
     public synchronized List<RFIDLiftData> getCachedData() {
-        List<RFIDLiftData> result = new ArrayList<>(data);
+        List<RFIDLiftData> result = data;
+        data = Collections.synchronizedList(new ArrayList<RFIDLiftData>());
         return result;
-    }
-
-    public synchronized void cleanCache() {
-        data.clear();
     }
 
 }
