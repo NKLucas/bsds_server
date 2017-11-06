@@ -2,6 +2,7 @@ package edu.neu.zhiyu.client;
 
 import com.google.gson.Gson;
 import edu.neu.zhiyu.model.RFIDLiftData;
+import edu.neu.zhiyu.utils.ChartMaker;
 
 import java.io.*;
 import java.util.*;
@@ -67,7 +68,7 @@ public class A2PostMain {
             String time = details[4];
             RFIDLiftData liftData = new RFIDLiftData(restoreID, day, skierID, liftID, time);
             lifts.add(gson.toJson(liftData));
-            if (lifts.size() >= 100000) {
+            if (lifts.size() >= 1000) {
                 break;
             }
         }
@@ -89,6 +90,17 @@ public class A2PostMain {
         System.out.println("Total successful responses: " + successRequest);
 
         printLatencyStats(latencies);
+        generateChart(latencies);
+    }
+
+    private static void generateChart(List<Long> latencies) {
+        String fileName = "post_latency_thread_" + THREADS;
+        ChartMaker chartMaker = new ChartMaker();
+        try {
+            chartMaker.makeChart(latencies, fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void printLatencyStats(List<Long> latencies) {

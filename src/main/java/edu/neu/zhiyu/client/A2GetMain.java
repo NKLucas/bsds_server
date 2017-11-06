@@ -1,5 +1,10 @@
 package edu.neu.zhiyu.client;
 
+import edu.neu.zhiyu.model.LiftStat;
+import edu.neu.zhiyu.utils.ChartMaker;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -63,6 +68,17 @@ public class A2GetMain {
         System.out.println("Total successful responses: " + successRequest);
 
         printLatencyStats(latencies);
+        generateChart(latencies);
+    }
+
+    private static void generateChart(List<Long> latencies) {
+        String fileName = "post_latency_thread_" + THREADS;
+        ChartMaker chartMaker = new ChartMaker();
+        try {
+            chartMaker.makeChart(latencies, fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void printLatencyStats(List<Long> latencies) {
