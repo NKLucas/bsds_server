@@ -18,16 +18,16 @@ public class ChartMaker extends JFrame{
         dataSet = new XYSeriesCollection();
     }
 
-    public void makeChart(List<Long> data, String fileName) throws IOException {
-        XYSeries series = new XYSeries(fileName);
+    public void makeChart(List<Long> data, String name) throws IOException {
+        XYSeries series = new XYSeries(name);
         for (int i = 0; i < data.size(); i++) {
             series.add(i, data.get(i));
         }
         dataSet.addSeries(series);
 
-        JFreeChart chart = ChartFactory.createXYLineChart(fileName, "Count", "Latency", dataSet);
+        JFreeChart chart = ChartFactory.createXYLineChart(name, "Count", "Latency", dataSet);
 
-        File file = new File(fileName);
+        File file = new File(name + ".jpeg");
         ChartUtilities.saveChartAsJPEG(file, chart, 800, 600);
     }
 

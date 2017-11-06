@@ -1,9 +1,7 @@
 package edu.neu.zhiyu.client;
 
-import edu.neu.zhiyu.model.LiftStat;
 import edu.neu.zhiyu.utils.ChartMaker;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -25,6 +23,9 @@ public class A2GetMain {
             skierIDs.add(String.valueOf(i));
         }
 
+        System.out.println("Request URL: " + REMOTE_URL);
+        System.out.println("Threads Number: " + THREADS + '\n');
+
         List<A2GetClient> clients = new ArrayList<>();
         ExecutorService ex = Executors.newFixedThreadPool(THREADS);
         int countForEachThreads = skierIDs.size() / THREADS;
@@ -39,7 +40,7 @@ public class A2GetMain {
         }
 
         long start = System.currentTimeMillis();
-        System.out.println("All Client Threads Started: " + new Date().toString());
+        System.out.println("All " + THREADS + " Client Threads Started: " + new Date().toString());
 
         ex.shutdown();
         while (!ex.isTerminated()) {
@@ -72,7 +73,7 @@ public class A2GetMain {
     }
 
     private static void generateChart(List<Long> latencies) {
-        String fileName = "post_latency_thread_" + THREADS;
+        String fileName = "get_latency_thread_" + THREADS;
         ChartMaker chartMaker = new ChartMaker();
         try {
             chartMaker.makeChart(latencies, fileName);

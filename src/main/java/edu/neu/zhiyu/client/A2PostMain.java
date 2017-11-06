@@ -14,7 +14,7 @@ public class A2PostMain {
     private static String REMOTE_URL = "http://ec2-34-209-12-29.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
     private static String LOCAL_URL = "http://localhost:9234/api/ski";
 
-    private static int THREADS = 100;
+    private static int THREADS = 130;
 
     public static void main(String[] args) throws Exception {
         List<String> lifts = new ArrayList<>(800000);
@@ -22,6 +22,8 @@ public class A2PostMain {
 
         loadDataFromFile(lifts, filePath);
         System.out.println("Total Record Read: " + lifts.size());
+        System.out.println("Request URL: " + REMOTE_URL);
+        System.out.println("Threads Number: " + THREADS + '\n');
 
         List<A2PostClient> clients = new ArrayList<>();
         ExecutorService ex = Executors.newFixedThreadPool(THREADS);
@@ -37,7 +39,7 @@ public class A2PostMain {
         }
 
         long start = System.currentTimeMillis();
-        System.out.println("All Client Threads Started: " + new Date().toString());
+        System.out.println("All " + THREADS + " Client Threads Started: " + new Date().toString());
 
         ex.shutdown();
         while (!ex.isTerminated()) {}
@@ -68,7 +70,7 @@ public class A2PostMain {
             String time = details[4];
             RFIDLiftData liftData = new RFIDLiftData(restoreID, day, skierID, liftID, time);
             lifts.add(gson.toJson(liftData));
-            if (lifts.size() >= 1000) {
+            if (lifts.size() >= 1000000) {
                 break;
             }
         }
