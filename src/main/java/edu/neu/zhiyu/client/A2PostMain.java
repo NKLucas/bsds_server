@@ -14,7 +14,7 @@ public class A2PostMain {
     private static String REMOTE_URL = "http://ec2-34-209-12-29.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
     private static String LOCAL_URL = "http://localhost:9234/api/ski";
 
-    private static int THREADS = 130;
+    private static int THREADS = 100;
 
     public static void main(String[] args) throws Exception {
         List<String> lifts = new ArrayList<>(800000);
