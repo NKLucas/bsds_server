@@ -36,11 +36,11 @@ public class A2PostClient extends Thread {
         for (String d : data) {
             long start = System.currentTimeMillis();
             Response response = this.postData(d);
-            response.close();
             requestSent += 1;
             if (response.getStatus() == 200) {
                 successReq += 1;
             }
+            response.close();
             long end = System.currentTimeMillis();
             latencies.add(end - start);
         }

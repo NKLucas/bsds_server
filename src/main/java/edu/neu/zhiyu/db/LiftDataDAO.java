@@ -30,7 +30,7 @@ public class LiftDataDAO {
     public static void batchInsert(List<RFIDLiftData> data) throws SQLException {
         PreparedStatement statement = null;
         Connection connection = null;
-        try{
+        try {
             connection = DBConnection.getConnection();
             statement = connection.prepareStatement(INSERT_QUERY);
             for (RFIDLiftData record : data) {

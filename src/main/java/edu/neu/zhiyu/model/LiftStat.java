@@ -1,27 +1,19 @@
 package edu.neu.zhiyu.model;
 
 public class LiftStat {
-    private String id;
     private String skierID;
     private int dayNum;
     private int liftCount;
     private int totalVertical;
 
-    public LiftStat(String id, String skierID, int dayNum, int liftCount, int totalVertical) {
-        this.id = id;
+    public LiftStat(String skierID, int dayNum, int liftCount, int totalVertical) {
         this.skierID = skierID;
         this.dayNum = dayNum;
         this.liftCount = liftCount;
         this.totalVertical = totalVertical;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    public LiftStat(){}
 
     public String getSkierID() {
         return skierID;

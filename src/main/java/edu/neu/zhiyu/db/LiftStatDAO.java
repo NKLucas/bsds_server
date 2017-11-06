@@ -1,9 +1,11 @@
 package edu.neu.zhiyu.db;
 
+import edu.neu.zhiyu.model.LiftStat;
 import edu.neu.zhiyu.model.RFIDLiftData;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,19 +17,48 @@ public class LiftStatDAO {
     private static int[] VERTICAL = {200, 300, 400, 500};
     private static LiftStatDAO instance;
 
-    private static final String UPSERT_QUERY =
-            "INSERT INTO " + TABLE_NAME + "(skier_id, day_num, "
-                    + "lift_count, total_vertical) VALUES(?,?,?,?) "
-                    + "ON CONFLICT (skier_id, day_num) DO UPDATE SET "
-                    + "total_vertical = " + TABLE_NAME + ".total_vertical + EXCLUDED.total_vertical, "
-                    + "lift_count = " + TABLE_NAME+ ".lift_count + EXCLUDED.lift_count";
+    private static String UPSERT_QUERY =
+                    "INSERT INTO " + TABLE_NAME + " (skier_id, day_num, lift_count, total_vertical) " +
+                    "VALUES(?,?,?,?) " +
+                    "ON CONFLICT (skier_id, day_num) DO UPDATE SET " +
+                    "total_vertical = " + TABLE_NAME + ".total_vertical + EXCLUDED.total_vertical, " +
+                    "lift_count = " + TABLE_NAME+ ".lift_count + EXCLUDED.lift_count";
 
+
+    private static String GET_QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE skier_id = ? AND day_num = ?";
 
     public static LiftStatDAO getInstance() {
         if (instance == null) {
             instance = new LiftStatDAO();
         }
         return instance;
+    }
+
+    public LiftStat getStatByIDAndDay(String skierID, int dayNum) throws SQLException {
+        PreparedStatement statement = null;
+        Connection connection = null;
+        LiftStat stat = new LiftStat();
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.prepareStatement(GET_QUERY);
+            statement.setString(1, skierID);
+            statement.setInt(2, dayNum);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                stat.setSkierID(skierID);
+                stat.setDayNum(dayNum);
+                stat.setLiftCount(resultSet.getInt("lift_count"));
+                stat.setTotalVertical(resultSet.getInt("total_vertical"));
+            }
+            statement.close();
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, "Failed to get the stat for " + skierID + " at day " + dayNum);
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return stat;
     }
 
     public void batchUpsert(List<RFIDLiftData> data) throws SQLException {

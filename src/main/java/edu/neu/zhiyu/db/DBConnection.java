@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 
 public class DBConnection {
     private static final String DBURL = "jdbc:postgresql://" +
-            "bsds-postgresql-db.cdz7axjtmano.us-west-2.rds.amazonaws.com:5432/" +
-            "SkiDB";
+            "bsds-postgresql-db-small.cdz7axjtmano.us-west-2.rds.amazonaws.com:5432/" +
+            "skidb";
     private static final String USER = "zhiyu";
     private static final String PASSWORD = "nklucas1991";
 
@@ -32,14 +32,5 @@ public class DBConnection {
         }
 
         return connection;
-    }
-
-    public static void closeConnection(Connection connection) {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            Logger.getLogger(DBConnection.class.getName())
-                    .log(Level.SEVERE, "Failed to close db connection.", e);
-        }
     }
 }

@@ -10,9 +10,6 @@ import java.util.concurrent.Executors;
 
 public class A2PostMain {
 
-    // small
-//    private static String REMOTE_URL = "http://ec2-34-209-86-171.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
-    // large
     private static String REMOTE_URL = "http://ec2-34-209-12-29.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
     private static String LOCAL_URL = "http://localhost:9234/api/ski";
 
@@ -70,7 +67,7 @@ public class A2PostMain {
             String time = details[4];
             RFIDLiftData liftData = new RFIDLiftData(restoreID, day, skierID, liftID, time);
             lifts.add(gson.toJson(liftData));
-            if (lifts.size() >= 1000) {
+            if (lifts.size() >= 100000) {
                 break;
             }
         }
