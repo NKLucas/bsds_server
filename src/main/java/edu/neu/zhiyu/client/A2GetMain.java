@@ -10,11 +10,11 @@ import java.util.concurrent.Executors;
 
 public class A2GetMain {
 
-    private static String REMOTE_URL = "http://ec2-34-209-12-29.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
+    private static String REMOTE_URL = "http://ec2-35-165-154-92.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
     private static String LOCAL_URL = "http://localhost:9234/api/ski";
 
     private static int THREADS = 100;
-    private static final int SKIER_COUNT = 400;
+    private static final int SKIER_COUNT = 40000;
 
     public static void main(String[] args) throws Exception {
 
@@ -49,7 +49,8 @@ public class A2GetMain {
 
         System.out.println("All Client Threads Finished: " + new Date().toString());
         long end = System.currentTimeMillis();
-        System.out.println("Total time taken: " + (end - start) + "ms. \n");
+        System.out.println("Total time taken: " + (end - start) + "ms.");
+        System.out.println("Throughput of this test: " + (SKIER_COUNT / ((end - start) / 1000)) + "\n");
 
         calculateAndPrintStats(clients);
     }
@@ -74,7 +75,7 @@ public class A2GetMain {
     }
 
     private static void generateChart(List<Long> latencies) {
-        String fileName = "get_latency_thread_" + THREADS;
+        String fileName = "get_latency_thread_" + THREADS + "_single_server";
         ChartMaker chartMaker = new ChartMaker();
         try {
             chartMaker.makeChart(latencies, fileName);

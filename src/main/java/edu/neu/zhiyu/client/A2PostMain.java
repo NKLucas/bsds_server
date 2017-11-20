@@ -47,7 +47,8 @@ public class A2PostMain {
 
         System.out.println("All Client Threads Finished: " + new Date().toString());
         long end = System.currentTimeMillis();
-        System.out.println("Total time taken: " + (end - start) + "ms. \n");
+        System.out.println("Total time taken: " + (end - start) + "ms.");
+        System.out.println("Throughput of this test: " + (lifts.size() / ((end - start) / 1000)) + "\n");
 
         calculateAndPrintStats(clients);
     }
@@ -97,7 +98,7 @@ public class A2PostMain {
     }
 
     private static void generateChart(List<Long> latencies) {
-        String fileName = "post_latency_thread_" + THREADS;
+        String fileName = "post_latency_thread_" + THREADS + "_single_server";
         ChartMaker chartMaker = new ChartMaker();
         try {
             chartMaker.makeChart(latencies, fileName);
