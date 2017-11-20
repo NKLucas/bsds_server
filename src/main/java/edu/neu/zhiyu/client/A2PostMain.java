@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 public class A2PostMain {
 
-    private static String REMOTE_URL = "http://ec2-35-165-154-92.us-west-2.compute.amazonaws.com:8080/bsds-server/api/ski";
+    private static String REMOTE_URL = "http://Test-Load-Balancer-1542817281.us-west-2.elb.amazonaws.com:8080/bsds-server/api/ski";
     private static String LOCAL_URL = "http://localhost:9234/api/ski";
 
     private static int THREADS = 100;
@@ -98,7 +98,7 @@ public class A2PostMain {
     }
 
     private static void generateChart(List<Long> latencies) {
-        String fileName = "post_latency_thread_" + THREADS + "_single_server";
+        String fileName = "post_latency_thread_" + THREADS + "_load_balancer";
         ChartMaker chartMaker = new ChartMaker();
         try {
             chartMaker.makeChart(latencies, fileName);
