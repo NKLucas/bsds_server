@@ -45,6 +45,7 @@ public class SQSSubscriber {
     public static List<Message> receiveMessages() {
         System.out.println("Receiving messages from: " + QURL);
         ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest(QURL);
+        receiveMessageRequest.setMaxNumberOfMessages(10);
         List<Message> messages = sqs.receiveMessage(receiveMessageRequest).getMessages();
         return messages;
     }

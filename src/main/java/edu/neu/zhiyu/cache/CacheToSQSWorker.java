@@ -18,7 +18,7 @@ public class CacheToSQSWorker {
     private static ScheduledExecutorService scheduledService = Executors.newScheduledThreadPool(1);
     private static long DELAY = 0;          // no delay
     private static long PERIOD = 5000;      // 5 seconds
-    private static int LATENCIES_MERGE_THRESHOLD = 1000; // 1000 Latencies into one message to sqs.
+    private static int LATENCIES_MERGE_THRESHOLD = 2000; // 2000 Latencies into one message to sqs.
     private static int SQS_BATCH_SIZE = 10; // Defined by amazon.
 
     public static void start() {
