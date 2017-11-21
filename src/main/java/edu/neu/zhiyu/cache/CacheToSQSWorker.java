@@ -16,7 +16,6 @@ public class CacheToSQSWorker {
 
     private static Logger logger = Logger.getLogger(CacheToSQSWorker.class.getName());
     private static ScheduledExecutorService scheduledService = Executors.newScheduledThreadPool(1);
-    private static long start = System.currentTimeMillis();
     private static long DELAY = 0;          // no delay
     private static long PERIOD = 5000;      // 5 seconds
     private static int LATENCIES_MERGE_THRESHOLD = 1000; // 1000 Latencies into one message to sqs.

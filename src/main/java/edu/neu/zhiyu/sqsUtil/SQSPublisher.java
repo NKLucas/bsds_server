@@ -21,29 +21,8 @@ public class SQSPublisher {
     private static final String QUEUE_NAME = "server_metrics_queue";
 
     public static void init() {
-        BasicAWSCredentials credentials = new BasicAWSCredentials("", "");
-        sqs = AmazonSQSClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(Regions.US_WEST_2)
-                .build();
-        QURL = createQueue();
-//        sqs = AmazonSQSClientBuilder.defaultClient();
-
-//        AWSCredentials credentials = null;
-//        try {
-//            credentials = new ProfileCredentialsProvider("rootkey.csv").getCredentials();
-//        } catch (Exception e) {
-//            throw new AmazonClientException(
-//                    "Cannot load the credentials from the credential profiles file. " +
-//                            "Please make sure that your credentials file is at the correct " +
-//                            "location (~/.aws/credentials), and is in valid format.",
-//                    e);
-//        }
-//
-//        sqs = AmazonSQSClientBuilder.standard()
-//                .withRegion(Regions.US_WEST_2)
-//                .build();
-
+        sqs = SQSUtil.getAmazonSQSClient();
+        QURL = SQSUtil.createQueue(sqs, QUEUE_NAME);
     }
 
     public static void sendBatchMessage(List<String> messages) {
@@ -74,8 +53,5 @@ public class SQSPublisher {
         }
     }
 
-    private static String createQueue() {
-        return sqs.createQueue(QUEUE_NAME).getQueueUrl();
-    }
 
 }

@@ -5,8 +5,11 @@
 
     <groupId>edu.neu.zhiyu</groupId>
     <artifactId>bsds-server</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>sqs_sub</module>
+    </modules>
     <name>bsds-server</name>
 
     <build>
