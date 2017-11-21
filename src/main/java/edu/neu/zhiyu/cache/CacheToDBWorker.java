@@ -19,7 +19,6 @@ public class CacheToDBWorker {
     private static ScheduledExecutorService scheduledService = Executors.newScheduledThreadPool(1);
     private static LiftDataDAO liftDataDAO;
     private static LiftStatDAO liftStatDAO;
-    private static long start = System.currentTimeMillis();
     private static long DELAY = 0;          // no delay
     private static long PERIOD = 5000;      // 5 seconds
 
