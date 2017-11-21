@@ -19,7 +19,7 @@ public class A2PostMain {
 
     public static void main(String[] args) throws Exception {
         List<String> lifts = new ArrayList<>();
-        String filePath = "src/main/resources/BSDSAssignment2Day999.csv";
+        String filePath = "src/main/resources/BSDSAssignment2Day5.csv";
 
         loadDataFromFile(lifts, filePath);
         System.out.println("Total Record Read: " + lifts.size());
@@ -55,7 +55,6 @@ public class A2PostMain {
 
     private static void loadDataFromFile(List<String> lifts, String filePath) throws Exception {
         Scanner scanner = new Scanner(new File(filePath));
-        scanner.nextLine();
         Gson gson = new Gson();
 
         while (scanner.hasNext()) {
