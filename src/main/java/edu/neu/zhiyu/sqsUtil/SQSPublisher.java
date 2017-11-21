@@ -10,9 +10,6 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.SendMessageBatchRequest;
 import com.amazonaws.services.sqs.model.SendMessageBatchRequestEntry;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +17,16 @@ import java.util.List;
 public class SQSPublisher {
 
     private static AmazonSQS sqs;
-//    private static String QURL = "https://sqs.us-west-2.amazonaws.com/950807841733/server_metrics_queue";
     private static String QURL;
     private static final String QUEUE_NAME = "server_metrics_queue";
 
     public static void init() {
-            BasicAWSCredentials credentials = new BasicAWSCredentials("", "");
-            sqs = AmazonSQSClientBuilder.standard()
-                    .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                    .withRegion(Regions.US_WEST_2)
-                    .build();
-            QURL = createQueue();
+        BasicAWSCredentials credentials = new BasicAWSCredentials("", "");
+        sqs = AmazonSQSClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                .withRegion(Regions.US_WEST_2)
+                .build();
+        QURL = createQueue();
 //        sqs = AmazonSQSClientBuilder.defaultClient();
 
 //        AWSCredentials credentials = null;
@@ -51,7 +47,7 @@ public class SQSPublisher {
     }
 
     public static void sendBatchMessage(List<String> messages) {
-        try{
+        try {
             List<SendMessageBatchRequestEntry> entries = new ArrayList<>();
 
             for (int i = 0; i < messages.size(); i++) {
@@ -62,7 +58,7 @@ public class SQSPublisher {
             }
             SendMessageBatchRequest batchRequest = new SendMessageBatchRequest(QURL, entries);
             sqs.sendMessageBatch(batchRequest);
-        }catch (AmazonServiceException ase) {
+        } catch (AmazonServiceException ase) {
             System.out.println("Caught an AmazonServiceException, which means your request made it " +
                     "to Amazon SQS, but was rejected with an error response for some reason.");
             System.out.println("Error Message:    " + ase.getMessage());

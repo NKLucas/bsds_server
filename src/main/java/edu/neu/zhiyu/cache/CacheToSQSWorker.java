@@ -41,7 +41,7 @@ public class CacheToSQSWorker {
         if (cacher.size() > 0) {
             List<ServerLatency> dataList = cacher.getCachedData();
             List<String> latStrs = new ArrayList<>();
-            try{
+            try {
                 for (ServerLatency latency : dataList) {
                     latStrs.add(gson.toJson(latency));
                 }
@@ -83,7 +83,6 @@ public class CacheToSQSWorker {
 
         return result;
     }
-
 
 
 }
